@@ -3,6 +3,7 @@
 import json
 import logging
 import logstash
+import pathlib
 import platform
 import psutil
 import subprocess, re
@@ -21,7 +22,7 @@ test_logger.addHandler(ch)
 report_dict = {
    "metric": True,
    "app.name":"systemStats",
-   "app.version":"1.2.0",
+   "app.version":"1.3.0",
    "env.domain":"home",
    "env.infrastructure":"prod",
    "env.name":"isbe",
@@ -107,7 +108,7 @@ t_dict['percent'] = disk.percent/100
 t_dict['name'] = 'Disk Percent'
 test_logger.info(json.dumps(t_dict))
 
-home = psutil.disk_usage('/home/jmurray')
+home = psutil.disk_usage(str(pathlib.Path.home()))
 
 t_dict = report_dict.copy()
 t_dict['bytes'] = home.used
