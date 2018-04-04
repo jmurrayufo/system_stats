@@ -14,6 +14,7 @@ name = "pypi"
 python-logstash = "*"
 psutil = "*"
 uptime = "*"
+tendo = "*"
 
 
 [requires]

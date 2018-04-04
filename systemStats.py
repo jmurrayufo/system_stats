@@ -12,7 +12,7 @@ import uptime
 
 host = '192.168.1.2'
 test_logger = logging.getLogger('systemStats.py')
-test_logger.setLevel(logging.DEBUG)
+test_logger.setLevel(logging.INFO)
 test_logger.addHandler(logstash.LogstashHandler(host, 5002, version=1))
 formatter = logging.Formatter('%(asctime)s %(process)d %(levelname)s %(filename)s %(message)s')
 ch = logging.StreamHandler(sys.stdout)
@@ -22,7 +22,7 @@ test_logger.addHandler(ch)
 report_dict = {
    "metric": True,
    "app.name":"systemStats",
-   "app.version":"1.3.0",
+   "app.version":"1.4.0",
    "env.domain":"home",
    "env.infrastructure":"prod",
    "env.name":"isbe",
@@ -30,7 +30,7 @@ report_dict = {
    }
 
 
-test_logger.info('Log Stats')
+test_logger.debug('Log Stats')
 
 cpus = psutil.cpu_percent(interval=1, percpu=True)
 
@@ -121,4 +121,4 @@ t_dict['generic_float'] = up_time
 t_dict['name'] = 'Uptime'
 test_logger.info(json.dumps(t_dict))
 
-test_logger.info('Finished logging stats')
+test_logger.debug('Finished logging stats')
